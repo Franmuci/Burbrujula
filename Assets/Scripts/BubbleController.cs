@@ -12,9 +12,13 @@ public class BubbleController : MonoBehaviour
 
     //Depending on bubble type
     private BubbleType bubbleType;
+    public BubbleType BubbleType { get => bubbleType; set => bubbleType = value; }
+
     [SerializeField] private List<int> bubblesLeft = new();
     [SerializeField] private GameObject bubbleObject;
     [SerializeField] private GameObject moleObject;
+
+    private int currentTypeIndex = -1;
 
     private MoleController moleController;
 
@@ -29,7 +33,8 @@ public class BubbleController : MonoBehaviour
     {
         bubbleType = BubbleType.ForwardBubble;
 
-        bubbleObject.GetComponent<Renderer>().material.color = bubbleColor[0];
+        currentTypeIndex = 0;
+        bubbleObject.GetComponent<Renderer>().material.color = bubbleColor[currentTypeIndex];
 
         moleController = moleObject.GetComponent<MoleController>();
     }
@@ -47,5 +52,25 @@ public class BubbleController : MonoBehaviour
         {
             moleController.RespondToClick(bubbleType);
         }
+    }
+
+    public void ChangeBubble(BubbleType newBubbleType)
+    {
+        switch (newBubbleType)
+        {
+            case BubbleType.ForwardBubble:
+                currentTypeIndex = 0;
+
+                break;
+            case BubbleType.StopBubble:
+                currentTypeIndex = 1;
+                break;
+            case BubbleType.FastBubble:
+                currentTypeIndex = 2;
+                break;
+        }
+
+        bubbleObject.GetComponent<Renderer>().material.color = bubbleColor[currentTypeIndex];
+        bubbleType = newBubbleType;
     }
 }
