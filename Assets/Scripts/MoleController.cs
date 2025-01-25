@@ -137,4 +137,21 @@ public class MoleController : MonoBehaviour
         moleAnimator.SetBool("isFalling", false);
     }
 
+    public void GetHurt()
+    {
+        isMoving = false;
+        moleAnimator.SetBool("isHurting", true);
+        moleAnimator.speed = 1;
+
+        StartCoroutine(StopHurting());
+    }
+
+    private IEnumerator StopHurting()
+    {
+        yield return new WaitForSeconds(1.5f);
+
+        transform.position = lastCheckpointPosition;
+        moleAnimator.SetBool("isHurting", false);
+    }
+
 }
