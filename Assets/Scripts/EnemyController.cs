@@ -24,16 +24,21 @@ public class EnemyController : MonoBehaviour
     {
         if(collision.gameObject.name == "Mole")
         {
-            if (enemyType.Equals(EnemyType.Abism))
-            {
-                MoleController moleController = collision.gameObject.GetComponent<MoleController>();
+            MoleController moleController = collision.gameObject.GetComponent<MoleController>();
 
-                if(moleController != null)
+            if (moleController != null) {
+                if (enemyType.Equals(EnemyType.Abism))
                 {
                     StartCoroutine(MakeMoleFall(moleController));
+                } else
+                {
+                    moleController.GetHurt();
                 }
             }
-        }
+
+        } 
+
+        
     }
 
     private IEnumerator MakeMoleFall(MoleController moleController)
