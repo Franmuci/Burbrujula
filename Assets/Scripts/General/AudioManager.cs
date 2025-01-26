@@ -26,10 +26,7 @@ public class AudioManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        else if (Instance != this)
-        {
-            Destroy(gameObject);
-        }
+        else if (Instance != this) Destroy(gameObject);
 
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -44,66 +41,37 @@ public class AudioManager : MonoBehaviour
         switch (scene.buildIndex)
         {
             case 0:
-                audioSourceList.ForEach(aS =>
-                {
-                    if (aS == transform.GetChild(0)) aS.Play();
-                });
+                PlayOnce(0, TYPEOFAUDIO.MUSIC);
                 break;
             case 1:
-                audioSourceList.ForEach(aS =>
-                {
-                    if (aS == transform.GetChild(1)) aS.Play();
-                });
+                PlayOnce(1, TYPEOFAUDIO.SFX);
                 break;
         }
     }
 
-    public void PlayOnce(AudioSource audioSource, TYPEOFAUDIO tOA)
+    public void PlayOnce(int audioSourceInList, TYPEOFAUDIO tOA)
     {
-        audioSourceList.ForEach(element =>
-        {
-            if (audioSource == element && tOA == TYPEOFAUDIO.MUSIC)
-            {
-                element.volume = musicVolumen;
-                element.Play();
-            }
-            else if (audioSource == element && tOA == TYPEOFAUDIO.SFX)
-            {
-                element.volume = sfxVolumen;
-                element.Play();
-            }
-        });
+
+        if (tOA == TYPEOFAUDIO.MUSIC) audioSourceList[audioSourceInList].volume = musicVolumen / 100;
+        else if (tOA == TYPEOFAUDIO.SFX) audioSourceList[audioSourceInList].volume = sfxVolumen / 100;
+
+        audioSourceList[audioSourceInList].Play();
     }
     
-    public void PlayLoop(AudioSource audioSource, TYPEOFAUDIO tOA)
+    public void PlayLoop(int audioSourceInList, TYPEOFAUDIO tOA)
     {
-        audioSourceList.ForEach(element =>
-        {
-            if (audioSource == element && tOA == TYPEOFAUDIO.MUSIC)
-            {
-                element.volume = musicVolumen;
-                element.loop = true;
-                element.Play();
-            }
-            else if (audioSource == element && tOA == TYPEOFAUDIO.SFX)
-            {
-                element.volume = sfxVolumen;
-                element.loop = true;
-                element.Play();
-            }
-        });
+        audioSourceList[audioSourceInList].loop = true;
+
+        if (tOA == TYPEOFAUDIO.MUSIC) audioSourceList[audioSourceInList].volume = musicVolumen / 100;
+        else if (tOA == TYPEOFAUDIO.SFX) audioSourceList[audioSourceInList].volume = sfxVolumen / 100;
+
+        audioSourceList[audioSourceInList].Play();
     }
 
-    public void StopAudio(AudioSource audioSource)
+    public void StopAudio(int audioSourceInList)
     {
-        audioSourceList.ForEach(element =>
-        {
-            if (audioSource == element)
-            {
-                element.loop = false;
-                element.Stop();
-            }
-        });
+        audioSourceList[audioSourceInList].loop = false;
+        audioSourceList[audioSourceInList].Stop();
     }
 
     public void SetMusicVolumen(float value)
