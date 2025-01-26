@@ -63,6 +63,8 @@ public class MoleController : MonoBehaviour
                     MoveTowardsBubble(fastSpeed);
                     break;
             }
+
+            StartCoroutine(AudioManager.Instance.PlayOnceAwaited(4, 0.22f, TYPEOFAUDIO.SFX));
         }
         
     }
@@ -83,6 +85,8 @@ public class MoleController : MonoBehaviour
         isMoving = false;
         moleAnimator.SetBool("isMoving", false);
         moleAnimator.speed = 1;
+
+        AudioManager.Instance.StopAudio(2);
     }
 
 
@@ -96,13 +100,14 @@ public class MoleController : MonoBehaviour
 
             transform.up = Vector3.Lerp(transform.up, direction, Time.deltaTime * 5);
 
+            AudioManager.Instance.PlayLoop(2, TYPEOFAUDIO.SFX);
+
             if (Vector3.Distance(transform.up, direction) < 0.01f)
             {
                 isRotating = false;
+                AudioManager.Instance.StopAudio(2);
             }
-
         }
-
     }
 
     private void MoveMole()
@@ -113,6 +118,8 @@ public class MoleController : MonoBehaviour
             moleAnimator.speed = currentAnimationSpeed;
 
             transform.position = transform.position + transform.up * Time.deltaTime * currentSpeed;
+            
+            AudioManager.Instance.PlayLoop(2, TYPEOFAUDIO.SFX);
         }
     }
 
@@ -135,6 +142,8 @@ public class MoleController : MonoBehaviour
         moleAnimator.SetBool("isFalling", true);
         moleAnimator.speed = 1;
 
+        AudioManager.Instance.PlayOnce(6, TYPEOFAUDIO.SFX);
+
         StartCoroutine(StopFalling());
     }
 
@@ -151,6 +160,8 @@ public class MoleController : MonoBehaviour
         isMoving = false;
         moleAnimator.SetBool("isHurting", true);
         moleAnimator.speed = 1;
+        
+        AudioManager.Instance.PlayOnce(5, TYPEOFAUDIO.SFX);
 
         StartCoroutine(StopHurting());
     }

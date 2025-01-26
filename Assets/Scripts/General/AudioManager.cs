@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,7 +11,7 @@ public enum TYPEOFAUDIO
 
 public class AudioManager : MonoBehaviour
 {
-    [HideInInspector] public AudioManager Instance;
+    [HideInInspector] public static AudioManager Instance;
 
     [SerializeField] List<AudioSource> audioSourceList = new();
 
@@ -41,16 +42,17 @@ public class AudioManager : MonoBehaviour
         switch (scene.buildIndex)
         {
             case 0:
-                PlayOnce(0, TYPEOFAUDIO.MUSIC);
+                PlayLoop(0, TYPEOFAUDIO.MUSIC);
                 break;
             case 1:
-                PlayOnce(1, TYPEOFAUDIO.SFX);
+                PlayLoop(1, TYPEOFAUDIO.SFX);
                 break;
         }
     }
 
     public void PlayOnce(int audioSourceInList, TYPEOFAUDIO tOA)
     {
+        if (audioSourceList[audioSourceInList].isPlaying) return;
 
         if (tOA == TYPEOFAUDIO.MUSIC) audioSourceList[audioSourceInList].volume = musicVolumen / 100;
         else if (tOA == TYPEOFAUDIO.SFX) audioSourceList[audioSourceInList].volume = sfxVolumen / 100;
@@ -60,6 +62,8 @@ public class AudioManager : MonoBehaviour
     
     public void PlayLoop(int audioSourceInList, TYPEOFAUDIO tOA)
     {
+        if (audioSourceList[audioSourceInList].isPlaying) return;
+
         audioSourceList[audioSourceInList].loop = true;
 
         if (tOA == TYPEOFAUDIO.MUSIC) audioSourceList[audioSourceInList].volume = musicVolumen / 100;
@@ -68,8 +72,40 @@ public class AudioManager : MonoBehaviour
         audioSourceList[audioSourceInList].Play();
     }
 
+    public IEnumerator PlayOnceAwaited(int audioSourceInList, float timeToWait, TYPEOFAUDIO tOA)
+    {
+        if (audioSourceList[audioSourceInList].isPlaying) Debug.Log("Reproduciendo");
+        else
+        {
+            yield return new WaitForSecondsRealtime(timeToWait);
+
+            if (tOA == TYPEOFAUDIO.MUSIC) audioSourceList[audioSourceInList].volume = musicVolumen / 100;
+            else if (tOA == TYPEOFAUDIO.SFX) audioSourceList[audioSourceInList].volume = sfxVolumen / 100;
+
+            audioSourceList[audioSourceInList].Play();
+        }
+    }
+    
+    public IEnumerator PlayLoopAwaited(int audioSourceInList, float timeToWait, TYPEOFAUDIO tOA)
+    {
+        if (audioSourceList[audioSourceInList].isPlaying) Debug.Log("Reproduciendo");
+        else
+        {
+            yield return new WaitForSecondsRealtime(timeToWait);
+
+            audioSourceList[audioSourceInList].loop = true;
+
+            if (tOA == TYPEOFAUDIO.MUSIC) audioSourceList[audioSourceInList].volume = musicVolumen / 100;
+            else if (tOA == TYPEOFAUDIO.SFX) audioSourceList[audioSourceInList].volume = sfxVolumen / 100;
+
+            audioSourceList[audioSourceInList].Play();
+        }
+    }
+
     public void StopAudio(int audioSourceInList)
     {
+        if (!audioSourceList[audioSourceInList].isPlaying) return;
+
         audioSourceList[audioSourceInList].loop = false;
         audioSourceList[audioSourceInList].Stop();
     }
