@@ -46,7 +46,10 @@ public class GameUIManager : MonoBehaviour
         {
             print("aiuda");
             bubbleController.ChangeBubble(BubbleType.ForwardBubble);
+            
+            AudioManager.Instance.PlayOnce(3, TYPEOFAUDIO.SFX);
         }
+
     }
 
     private void OnCardStopClicked()
@@ -55,6 +58,8 @@ public class GameUIManager : MonoBehaviour
         {
             print("socorro");
             bubbleController.ChangeBubble(BubbleType.StopBubble);
+            
+            AudioManager.Instance.PlayOnce(3, TYPEOFAUDIO.SFX);
         }
     }
 
@@ -64,6 +69,8 @@ public class GameUIManager : MonoBehaviour
         {
             print("aiudaaaaa");
             bubbleController.ChangeBubble(BubbleType.FastBubble);
+            
+            AudioManager.Instance.PlayOnce(3, TYPEOFAUDIO.SFX);
         }
     }
 }
