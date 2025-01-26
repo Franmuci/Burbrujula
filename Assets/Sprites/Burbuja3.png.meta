@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: d97a2ae2116c57a4da0b94a3be86bded
+guid: c83c3fd96b9adb642865a2e013563bda
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5712959122012955994
-    second: Bubble_0
+      213: 5527841993057076415
+    second: Burbuja3_0
+  - first:
+      213: -6858252075469382420
+    second: Burbuja3_1
+  - first:
+      213: 194495214268095664
+    second: Burbuja3_2
+  - first:
+      213: 6436725119538142126
+    second: Burbuja3_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,40 +105,93 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bubble_0
+      name: Burbuja3_0
       rect:
         serializedVersion: 2
-        x: 98
-        y: 273
-        width: 1516
-        height: 1507
+        x: 1244
+        y: 1468
+        width: 12
+        height: 10
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6aa171472fd77b0b0800000000000000
-      internalID: -5712959122012955994
+      spriteID: fb487a24107d6bc40800000000000000
+      internalID: 5527841993057076415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Burbuja3_1
+      rect:
+        serializedVersion: 2
+        x: 1257
+        y: 1452
+        width: 24
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cecdf8de21892d0a0800000000000000
+      internalID: -6858252075469382420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Burbuja3_2
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 245
+        width: 1507
+        height: 1188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bc96fced5cf2b200800000000000000
+      internalID: 194495214268095664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Burbuja3_3
+      rect:
+        serializedVersion: 2
+        x: 972
+        y: 246
+        width: 702
+        height: 740
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eab97ea9467d35950800000000000000
+      internalID: 6436725119538142126
       vertices: []
       indices: 
       edges: []
@@ -148,7 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Bubble_0: -5712959122012955994
+      Burbuja3_0: 5527841993057076415
+      Burbuja3_1: -6858252075469382420
+      Burbuja3_2: 194495214268095664
+      Burbuja3_3: 6436725119538142126
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

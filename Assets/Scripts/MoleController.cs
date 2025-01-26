@@ -20,6 +20,8 @@ public class MoleController : MonoBehaviour
     private bool isRotating;
 
     [SerializeField] private GameObject raycastOrigin;
+    [SerializeField] private GameObject raycastOrigin2;
+    [SerializeField] private GameObject raycastOrigin3;
     private LayerMask wallLayer;
 
     private Animator moleAnimator;
@@ -117,7 +119,14 @@ public class MoleController : MonoBehaviour
     private bool IsWalled()
     {
         Debug.DrawRay(raycastOrigin.transform.position, transform.up * 0.1f, Color.red);
-        return Physics2D.Raycast(raycastOrigin.transform.position, transform.up, 0.1f, wallLayer);
+        Debug.DrawRay(raycastOrigin2.transform.position, transform.up * 0.1f, Color.yellow);
+        Debug.DrawRay(raycastOrigin3.transform.position, transform.up * 0.1f, Color.green);
+
+        bool isRaycasting1 = Physics2D.Raycast(raycastOrigin.transform.position, transform.up, 0.2f, wallLayer);
+        bool isRaycasting2 = Physics2D.Raycast(raycastOrigin2.transform.position, transform.up, 0.2f, wallLayer);
+        bool isRaycasting3 = Physics2D.Raycast(raycastOrigin3.transform.position, transform.up, 0.2f, wallLayer);
+
+        return isRaycasting1 || isRaycasting2 || isRaycasting3;
     }
 
     public void FallDownTheAbism()
