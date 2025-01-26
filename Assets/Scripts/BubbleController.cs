@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,6 +29,8 @@ public class BubbleController : MonoBehaviour
     //Behaviour
     private Vector2 mousePosition;
 
+    private Animator bubbleAnimator;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -35,6 +38,7 @@ public class BubbleController : MonoBehaviour
 
         currentTypeIndex = 0;
         bubbleObject.GetComponent<Renderer>().material.color = bubbleColor[currentTypeIndex];
+        bubbleAnimator = bubbleObject.GetComponent<Animator>();
 
         moleController = moleObject.GetComponent<MoleController>();
     }
@@ -51,6 +55,7 @@ public class BubbleController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             moleController.RespondToClick(bubbleType);
+            StartCoroutine(MakeBubblePop());
         }
     }
 
@@ -73,4 +78,13 @@ public class BubbleController : MonoBehaviour
         bubbleObject.GetComponent<Renderer>().material.color = bubbleColor[currentTypeIndex];
         bubbleType = newBubbleType;
     }
+
+    public IEnumerator MakeBubblePop()
+    {
+        bubbleAnimator.SetBool("isPopping", true);
+        yield return new WaitForSeconds(1f);
+
+        bubbleAnimator.SetBool("isPopping", false);
+    }
+    
 }
