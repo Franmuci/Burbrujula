@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: d97a2ae2116c57a4da0b94a3be86bded
+guid: e4c0d1aeb8987e34bb786b2ea537b576
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5712959122012955994
-    second: Bubble_0
+      213: 739546270099654562
+    second: Burbuja2_0
+  - first:
+      213: -5182528732588081476
+    second: Burbuja2_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,30 +99,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bubble_0
+      name: Burbuja2_0
       rect:
         serializedVersion: 2
         x: 98
-        y: 273
-        width: 1516
-        height: 1507
+        y: 245
+        width: 1513
+        height: 1535
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +118,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6aa171472fd77b0b0800000000000000
-      internalID: -5712959122012955994
+      spriteID: 2a741441a65634a00800000000000000
+      internalID: 739546270099654562
       vertices: []
       indices: 
       edges: []
@@ -138,7 +128,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 772764543995c9b48b87c163e6d68221
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +138,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Bubble_0: -5712959122012955994
+      Burbuja2_0: 739546270099654562
+      Burbuja2_1: -5182528732588081476
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
