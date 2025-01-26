@@ -14,7 +14,10 @@ public class MoleController : MonoBehaviour
 
     private Vector3 clickPosition;
 
+    public GameObject lastCheckpoint;
+
     private Vector2 lastCheckpointPosition = new Vector2(0,0);
+    public Vector2 LastCheckpointPosition { get => lastCheckpointPosition; set => lastCheckpointPosition = value; }
 
     private bool isMoving;
     private bool isRotating;
@@ -52,15 +55,24 @@ public class MoleController : MonoBehaviour
             switch (currentBubbleType)
             {
                 case BubbleType.ForwardBubble:
-                    currentAnimationSpeed = animationNormalSpeed;
-                    MoveTowardsBubble(normalSpeed);
+                    if (GameUIManager.Instance.canClickForwardBubble)
+                    {
+                        currentAnimationSpeed = animationNormalSpeed;
+                        MoveTowardsBubble(normalSpeed);
+                    }
                     break;
                 case BubbleType.StopBubble:
-                    StopMoving();
+                    if (GameUIManager.Instance.canClickStopBubble)
+                    {
+                        StopMoving();
+                    }
                     break;
                 case BubbleType.FastBubble:
-                    currentAnimationSpeed = animationFastSpeed;
-                    MoveTowardsBubble(fastSpeed);
+                    if (GameUIManager.Instance.canClickFastBubble)
+                    {
+                        currentAnimationSpeed = animationFastSpeed;
+                        MoveTowardsBubble(fastSpeed);
+                    }
                     break;
             }
 
@@ -153,6 +165,8 @@ public class MoleController : MonoBehaviour
         
         transform.position = lastCheckpointPosition;
         moleAnimator.SetBool("isFalling", false);
+
+        ManageBubbles();
     }
 
     public void GetHurt()
@@ -172,6 +186,23 @@ public class MoleController : MonoBehaviour
 
         transform.position = lastCheckpointPosition;
         moleAnimator.SetBool("isHurting", false);
+
+        ManageBubbles();
     }
 
+    private void ManageBubbles()
+    {
+        if (lastCheckpoint != null)
+        {
+            lastCheckpoint.GetComponent<CheckpointController>().ChangeBubbleQuantity();
+        }
+        else
+        {
+            BubbleController bubbleController = GameObject.Find("Worm").GetComponent<BubbleController>();
+            bubbleController.bubblesLeft.Clear();
+            bubbleController.bubblesLeft.Add(5);
+            bubbleController.bubblesLeft.Add(1);
+            bubbleController.bubblesLeft.Add(1);
+        }
+    }
 }

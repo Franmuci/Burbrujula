@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,9 +14,13 @@ public class GameUIManager : MonoBehaviour
     private Button cardStopButton;
     private Button cardFastButton;
 
-    private bool canClickForwardBubble;
-    private bool canClickStopBubble;
-    private bool canClickFastBubble;
+    private TMP_Text forwardBubbleQuantityText;
+    private TMP_Text stopBubbleQuantityText;
+    private TMP_Text fastBubbleQuantityText;
+
+    public bool canClickForwardBubble;
+    public bool canClickStopBubble;
+    public bool canClickFastBubble;
 
     [SerializeField] private GameObject bubble;
     private BubbleController bubbleController;
@@ -33,6 +38,10 @@ public class GameUIManager : MonoBehaviour
         cardStopButton = cardStopBubble.GetComponent<Button>();
         cardFastButton = cardFastBubble.GetComponent<Button>();
 
+        forwardBubbleQuantityText = cardForwardBubble.GetComponentInChildren<TMP_Text>();
+        stopBubbleQuantityText = cardStopBubble.GetComponentInChildren<TMP_Text>();
+        fastBubbleQuantityText = cardFastBubble.GetComponentInChildren<TMP_Text>();
+
         bubbleController = bubble.GetComponent<BubbleController>();
 
         cardForwardButton.onClick.AddListener(OnCardForwardClicked);
@@ -40,11 +49,17 @@ public class GameUIManager : MonoBehaviour
         cardFastButton.onClick.AddListener(OnCardFastClicked);
     }
 
+    private void Update()
+    {
+        forwardBubbleQuantityText.text = bubbleController.bubblesLeft[0].ToString();
+        stopBubbleQuantityText.text = bubbleController.bubblesLeft[1].ToString();
+        fastBubbleQuantityText.text = bubbleController.bubblesLeft[2].ToString();
+    }
+
     private void OnCardForwardClicked()
     {
         if (canClickForwardBubble)
         {
-            print("aiuda");
             bubbleController.ChangeBubble(BubbleType.ForwardBubble);
             
             AudioManager.Instance.PlayOnce(3, TYPEOFAUDIO.SFX);
@@ -56,7 +71,6 @@ public class GameUIManager : MonoBehaviour
     {
         if (canClickStopBubble)
         {
-            print("socorro");
             bubbleController.ChangeBubble(BubbleType.StopBubble);
             
             AudioManager.Instance.PlayOnce(3, TYPEOFAUDIO.SFX);
@@ -67,7 +81,6 @@ public class GameUIManager : MonoBehaviour
     {
         if (canClickFastBubble)
         {
-            print("aiudaaaaa");
             bubbleController.ChangeBubble(BubbleType.FastBubble);
             
             AudioManager.Instance.PlayOnce(3, TYPEOFAUDIO.SFX);
