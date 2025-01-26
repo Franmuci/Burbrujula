@@ -6,7 +6,7 @@ public class GoBackController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Wall") )
+        if (collision.gameObject.layer == LayerMask.NameToLayer("WallGoBack") )
         {
 
             padre.GetComponent<SpriteRenderer>().enabled = false;
