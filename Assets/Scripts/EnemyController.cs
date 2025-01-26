@@ -8,6 +8,14 @@ public enum EnemyType
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] private EnemyType enemyType;
+    [SerializeField] private float speed = 3.0f;
+    public float secondsRespawn = 2.0f;
+    private Vector3 startingPosition;
+
+    private void Start()
+    {
+        startingPosition = transform.position;
+    }
 
     private void Update()
     {
@@ -16,8 +24,13 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private void MoveEarthworm() { 
-        
+    private void MoveEarthworm() {
+        transform.position = transform.position + transform.up * speed * Time.deltaTime;
+    }
+
+    public void PutEarthwormInStartingPosition()
+    {
+        transform.position = startingPosition;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
