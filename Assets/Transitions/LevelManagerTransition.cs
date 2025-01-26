@@ -8,8 +8,10 @@ public class LevelManagerTransition : MonoBehaviour
 {
     public static LevelManagerTransition Instance;
 
+
     public Slider progressBar;
     public GameObject transitionsContainer;
+    public GameObject loadingGameObject;
 
     private SceneTransition[] transitions;
 
@@ -45,7 +47,7 @@ public class LevelManagerTransition : MonoBehaviour
 
         yield return transition.AnimateTransitionIn();
 
-        progressBar.gameObject.SetActive(true);
+        loadingGameObject.SetActive(true);
 
         do
         {
@@ -57,7 +59,7 @@ public class LevelManagerTransition : MonoBehaviour
 
         scene.allowSceneActivation = true;
 
-        progressBar.gameObject.SetActive(false);
+        loadingGameObject.gameObject.SetActive(false);
 
         yield return transition.AnimateTransitionOut();
     }
