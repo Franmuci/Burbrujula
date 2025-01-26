@@ -4,6 +4,8 @@ public class MainMenuFran : MonoBehaviour
 {
     public void SwitchScene()
     {
-        LevelManagerTransition.Instance.LoadScene("Level1", "CircleWipe");
+        LevelManagerTransition.Instance.GenerarBuruBuru("BubbleUp");
+        LevelManagerTransition.Instance.Tutorial();
+
     }
 }

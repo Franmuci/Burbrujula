@@ -10,8 +10,10 @@ public class LevelManagerTransition : MonoBehaviour
 
 
     public Slider progressBar;
+    public bool isInTutorial;
     public GameObject transitionsContainer;
     public GameObject loadingGameObject;
+    public GameObject panelGameObject;
 
     private SceneTransition[] transitions;
 
@@ -37,6 +39,22 @@ public class LevelManagerTransition : MonoBehaviour
     {
         StartCoroutine(LoadSceneAsync(sceneName, transitionName));
     }
+
+
+    public void GenerarBuruBuru(string transitionName)
+    {
+        SceneTransition transition = transitions.First(t => t.name == transitionName);
+        transition.BubbleTransition();
+    }
+
+    public void Tutorial()
+    {
+        Time.timeScale = 0.0f;
+        panelGameObject.SetActive(true);
+        isInTutorial = true;
+
+    }
+
 
     private IEnumerator LoadSceneAsync(string sceneName, string transitionName)
     {

@@ -25,4 +25,9 @@ public class CrossFade : SceneTransition
         var tweener = crossFade.DOFade(0f, 1f);
         yield return tweener.WaitForCompletion();
     }
+
+    public override void BubbleTransition()
+    {
+        //throw new System.NotImplementedException();
+    }
 }
