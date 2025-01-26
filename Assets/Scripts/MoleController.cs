@@ -14,7 +14,7 @@ public class MoleController : MonoBehaviour
 
     private Vector3 clickPosition;
 
-    private Vector2 lastCheckpointPosition = new Vector2(0,0);
+    private Vector2 lastCheckpointPosition = new Vector2(-20,-0.5f); // cambiar a codigo de checkpoint
 
     private bool isMoving;
     private bool isRotating;
