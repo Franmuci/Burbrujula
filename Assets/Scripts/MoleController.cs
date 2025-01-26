@@ -45,20 +45,24 @@ public class MoleController : MonoBehaviour
 
     public void RespondToClick(BubbleType currentBubbleType)
     {
-        switch (currentBubbleType)
+        if (!CardIgnorer.isHoveringCard)
         {
-            case BubbleType.ForwardBubble:
-                currentAnimationSpeed = animationNormalSpeed;
-                MoveTowardsBubble(normalSpeed); 
-                break;
-            case BubbleType.StopBubble:
-                StopMoving();
-                break;
-            case BubbleType.FastBubble:
-                currentAnimationSpeed = animationFastSpeed;
-                MoveTowardsBubble(fastSpeed);
-                break;
+            switch (currentBubbleType)
+            {
+                case BubbleType.ForwardBubble:
+                    currentAnimationSpeed = animationNormalSpeed;
+                    MoveTowardsBubble(normalSpeed);
+                    break;
+                case BubbleType.StopBubble:
+                    StopMoving();
+                    break;
+                case BubbleType.FastBubble:
+                    currentAnimationSpeed = animationFastSpeed;
+                    MoveTowardsBubble(fastSpeed);
+                    break;
+            }
         }
+        
     }
 
     private void MoveTowardsBubble(float speed)
@@ -131,6 +135,23 @@ public class MoleController : MonoBehaviour
         
         transform.position = lastCheckpointPosition;
         moleAnimator.SetBool("isFalling", false);
+    }
+
+    public void GetHurt()
+    {
+        isMoving = false;
+        moleAnimator.SetBool("isHurting", true);
+        moleAnimator.speed = 1;
+
+        StartCoroutine(StopHurting());
+    }
+
+    private IEnumerator StopHurting()
+    {
+        yield return new WaitForSeconds(1.5f);
+
+        transform.position = lastCheckpointPosition;
+        moleAnimator.SetBool("isHurting", false);
     }
 
 }
