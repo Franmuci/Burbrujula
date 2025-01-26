@@ -37,15 +37,20 @@ public class AudioManager : MonoBehaviour
         Debug.Log($"La escena {scene.name} ha terminado de cargar.");
 
         //Añade todos los audio sources
-        AddAllAudioSource();
+        //AddAllAudioSource();
 
         switch (scene.buildIndex)
         {
             case 0:
                 PlayLoop(0, TYPEOFAUDIO.MUSIC);
+                StopAudio(1);
+                Debug.Log("0");
                 break;
             case 1:
-                PlayLoop(1, TYPEOFAUDIO.SFX);
+                PlayLoop(1, TYPEOFAUDIO.MUSIC);
+                StopAudio(0);
+                Debug.Log("1");
+
                 break;
         }
     }

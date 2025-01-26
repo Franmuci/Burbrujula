@@ -18,6 +18,7 @@ public class CircleWipe : SceneTransition
     {
         var tweener = circle.rectTransform.DOAnchorPosX(1000f, 1f);
         yield return tweener.WaitForCompletion();
+        
     }
 
     public override void BubbleTransition()

@@ -3283,6 +3283,7 @@ MonoBehaviour:
   progressBar: {fileID: 1739695455}
   transitionsContainer: {fileID: 1295926790}
   loadingGameObject: {fileID: 1817395596}
+  endTransition: 0
 --- !u!114 &923708703
 MonoBehaviour:
   m_ObjectHideFlags: 0

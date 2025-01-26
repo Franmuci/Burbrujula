@@ -16,7 +16,7 @@ public class MoleController : MonoBehaviour
 
     public GameObject lastCheckpoint;
 
-    private Vector2 lastCheckpointPosition = new Vector2(0,0);
+    private Vector2 lastCheckpointPosition = new Vector2(-20,-0.5f);
     public Vector2 LastCheckpointPosition { get => lastCheckpointPosition; set => lastCheckpointPosition = value; }
 
     private bool isMoving;
@@ -50,7 +50,7 @@ public class MoleController : MonoBehaviour
 
     public void RespondToClick(BubbleType currentBubbleType)
     {
-        if (!CardIgnorer.isHoveringCard)
+        if (!CardIgnorer.isHoveringCard && !TutorialBeh.isInTutorial)
         {
             switch (currentBubbleType)
             {
@@ -200,9 +200,12 @@ public class MoleController : MonoBehaviour
         {
             BubbleController bubbleController = GameObject.Find("Worm").GetComponent<BubbleController>();
             bubbleController.bubblesLeft.Clear();
-            bubbleController.bubblesLeft.Add(5);
-            bubbleController.bubblesLeft.Add(1);
-            bubbleController.bubblesLeft.Add(1);
+            bubbleController.bubblesLeft.Add(8);
+            bubbleController.bubblesLeft.Add(4);
+            bubbleController.bubblesLeft.Add(4);
+            GameUIManager.Instance.canClickStopBubble = true;
+            GameUIManager.Instance.canClickForwardBubble = true;
+            GameUIManager.Instance.canClickFastBubble = true;
         }
     }
 }
