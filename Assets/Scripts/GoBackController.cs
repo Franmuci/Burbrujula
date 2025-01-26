@@ -8,9 +8,7 @@ public class GoBackController : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Wall") )
         {
-            //TODO FRAN HAZ TU MAGIA (llamar al gu PutEarthwormInStartingPosition)
-            //PASar las cosas de las tarjetas mias
-            //commit
+
             padre.GetComponent<SpriteRenderer>().enabled = false;
             padre.GetComponent<Collider2D>().enabled = false;
             Invoke(nameof(Respawn),gameObject.GetComponentInParent<EnemyController>().secondsRespawn);

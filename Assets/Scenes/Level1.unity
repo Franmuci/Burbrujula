@@ -222,6 +222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 2
   speed: 3
+  secondsRespawn: 2
 --- !u!58 &98022606
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -616,6 +617,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 0
   speed: 3
+  secondsRespawn: 2
 --- !u!1 &396682673
 GameObject:
   m_ObjectHideFlags: 0
@@ -1085,6 +1087,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 1
   speed: 2
+  secondsRespawn: 2
 --- !u!61 &833062647
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1359,6 +1362,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 0
   speed: 3
+  secondsRespawn: 2
 --- !u!1 &941396660
 GameObject:
   m_ObjectHideFlags: 0
@@ -1511,6 +1515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239d7759c3eec694792a85b350ff7845, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  padre: {fileID: 833062643}
 --- !u!61 &1041245495
 BoxCollider2D:
   m_ObjectHideFlags: 0
