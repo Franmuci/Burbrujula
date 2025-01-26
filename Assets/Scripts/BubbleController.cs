@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,9 +15,10 @@ public class BubbleController : MonoBehaviour
     private BubbleType bubbleType;
     public BubbleType BubbleType { get => bubbleType; set => bubbleType = value; }
 
-    [SerializeField] private List<int> bubblesLeft = new();
-    [SerializeField] private GameObject bubbleObject;
+    [SerializeField] public List<int> bubblesLeft = new();
+    [SerializeField] private GameObject bubbleObjectPrefab;
     [SerializeField] private GameObject moleObject;
+    [SerializeField] private Transform bubblePlaceholder;
 
     private int currentTypeIndex = -1;
 
@@ -28,13 +30,14 @@ public class BubbleController : MonoBehaviour
     //Behaviour
     private Vector2 mousePosition;
 
+    private Animator bubbleAnimator;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         bubbleType = BubbleType.ForwardBubble;
 
         currentTypeIndex = 0;
-        bubbleObject.GetComponent<Renderer>().material.color = bubbleColor[currentTypeIndex];
 
         moleController = moleObject.GetComponent<MoleController>();
     }
@@ -48,9 +51,10 @@ public class BubbleController : MonoBehaviour
 
 
         //Change mole movement
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !CardIgnorer.isHoveringCard)
         {
             moleController.RespondToClick(bubbleType);
+            StartCoroutine(MakeBubblePop());
         }
     }
 
@@ -60,7 +64,6 @@ public class BubbleController : MonoBehaviour
         {
             case BubbleType.ForwardBubble:
                 currentTypeIndex = 0;
-
                 break;
             case BubbleType.StopBubble:
                 currentTypeIndex = 1;
@@ -69,8 +72,43 @@ public class BubbleController : MonoBehaviour
                 currentTypeIndex = 2;
                 break;
         }
-
-        bubbleObject.GetComponent<Renderer>().material.color = bubbleColor[currentTypeIndex];
         bubbleType = newBubbleType;
     }
+
+    public IEnumerator MakeBubblePop()
+    {
+        if(bubblesLeft[currentTypeIndex] > 0)
+        {
+            bubblesLeft[currentTypeIndex]--;
+        }
+            
+
+        bool canClick = false;
+
+            switch (currentTypeIndex)
+            {
+                case 0:
+                    canClick = GameUIManager.Instance.canClickForwardBubble;
+                    GameUIManager.Instance.canClickForwardBubble = bubblesLeft[currentTypeIndex] > 0; break;
+                case 1:
+                    canClick = GameUIManager.Instance.canClickStopBubble;
+                    GameUIManager.Instance.canClickStopBubble = bubblesLeft[currentTypeIndex] > 0; break;
+                case 2:
+                    canClick = GameUIManager.Instance.canClickFastBubble;
+                    GameUIManager.Instance.canClickFastBubble = bubblesLeft[currentTypeIndex] > 0; break;
+            }
+
+        if (canClick)
+        {
+            GameObject bubbleObject = Instantiate(bubbleObjectPrefab, bubblePlaceholder);
+            bubbleAnimator = bubbleObject.GetComponent<Animator>();
+            bubbleObject.GetComponent<Renderer>().material.color = bubbleColor[currentTypeIndex];
+            bubbleAnimator.SetBool("isPopping", true);
+            yield return new WaitForSeconds(1f);
+
+            bubbleAnimator.SetBool("isPopping", false);
+        }
+
+    }
+    
 }
